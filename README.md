@@ -5,7 +5,7 @@
 - Kaykit_Adventurers 2
 
 2d
-- everything else i think
+- All Kenny_Zips
 
 Aseprite
 - sprite maker i think
