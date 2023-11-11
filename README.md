@@ -6,3 +6,6 @@
 
 2d
 - everything else i think
+
+Aseprite
+- sprite maker i think
