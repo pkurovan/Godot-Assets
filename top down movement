@@ -2,55 +2,62 @@
 --------------------------------------------
 extends CharacterBody2D
 
-var speed = 400  # speed in pixels/sec
+@export var speed = 400
+
+func get_input():
+	var input_direction = Input.get_vector("left", "right", "up", "down")
+	velocity = input_direction * speed
 
 func _physics_process(delta):
-	var direction = Input.get_vector("left", "right", "up", "down")
-	velocity = direction * speed
-	
+	get_input()
 	move_and_slide()
  --------------------------------------------
  Aim with mouse
  --------------------------------------------
  extends CharacterBody2D
 
-var speed = 400  # move speed in pixels/sec
+@export var speed = 400
+
+func get_input():
+	look_at(get_global_mouse_position())
+	velocity = transform.x * Input.get_axis("down", "up") * speed
 
 func _physics_process(delta):
-	look_at(get_global_mouse_position())
-	var move_input = Input.get_axis("down", "up")
-	velocity = transform.x * move_input * speed
+	get_input()
 	move_and_slide()
  --------------------------------------------
  click and move
  --------------------------------------------
- extends CharacterBody2D
+extends CharacterBody2D
 
-var speed = 400  # move speed in pixels/sec
-var target = null
+@export var speed = 400
+
+var target = position
 
 func _input(event):
 	if event.is_action_pressed("click"):
 		target = get_global_mouse_position()
 
 func _physics_process(delta):
-	if target:
-		# look_at(target)
-		velocity = position.direction_to(target) * speed
-		if position.distance_to(target) < 10:
-			velocity = Vector2.ZERO
-	move_and_slide()
+	velocity = position.direction_to(target) * speed
+	# look_at(target)
+	if position.distance_to(target) > 10:
+		move_and_slide()
  -------------------------------------------
  rotate and move
  -------------------------------------------
  extends CharacterBody2D
 
-var speed = 400  # move speed in pixels/sec
-var rotation_speed = 1.5  # turning speed in radians/sec
+@export var speed = 400
+@export var rotation_speed = 1.5
+
+var rotation_direction = 0
+
+func get_input():
+	rotation_direction = Input.get_axis("left", "right")
+	velocity = transform.x * Input.get_axis("down", "up") * speed
 
 func _physics_process(delta):
-	var move_input = Input.get_axis("down", "up")
-	var rotation_direction = Input.get_axis("left", "right")
-	velocity = transform.x * move_input * speed
+	get_input()
 	rotation += rotation_direction * rotation_speed * delta
 	move_and_slide()
