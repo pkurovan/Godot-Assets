@@ -8,5 +8,9 @@
 - All Kenny_Zips
 - https://kenney.nl/
 
+for inventory
+- Inventory system
+- https://github.com/ExpressoBits/inventory-system/wiki
+
 Aseprite
 - sprite maker i think
